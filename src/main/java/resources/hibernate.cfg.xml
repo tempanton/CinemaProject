@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/CinemaDatabase</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="cinema.domain.Movie"/>
+        <mapping class="cinema.domain.Role"/>
+        <mapping class="cinema.domain.Room"/>
+        <mapping class="cinema.domain.Seance"/>
+        <mapping class="cinema.domain.Ticket"/>
+        <mapping class="cinema.domain.User"/>
+        <mapping class="cinema.domain.UserPrivilege"/>
+    </session-factory>
+
+</hibernate-configuration>
