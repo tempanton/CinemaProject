@@ -13,16 +13,18 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <sql-driver>9.1-901-1.jdbc4</sql-driver>
+    <sql-driver>42.2.2</sql-driver>
     <spring>4.2.4.RELEASE</spring>
     <javax-web>7.0</javax-web>
+    <jstl.version>1.2</jstl.version>
     <embedded-tomcat>9.0.0.M6</embedded-tomcat>
   </properties>
+
 
   <dependencies>
 
     <dependency>
-      <groupId>postgresql</groupId>
+      <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>${sql-driver}</version>
     </dependency>
@@ -42,8 +44,18 @@
       <version>${spring}</version>
     </dependency>
     <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring}</version>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
+      <version>${spring}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
       <version>${spring}</version>
     </dependency>
     <dependency>
@@ -52,6 +64,17 @@
       <version>${javax-web}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.2.2.Final</version>
+    </dependency>
+
 
     <!-- TODO: Embedded Tomcat service -->
     <dependency>

@@ -62,13 +62,13 @@ public class User {
         this.birth = birth;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-            name = "c_role",
+            name = "c_user_privileges",
             joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
+                    name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "role_id"))
+                    name = "user_id", referencedColumnName = "id"))
     public Collection<Role> getRoles() {
         return roles;
     }

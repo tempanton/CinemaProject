@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,5 +34,9 @@ public class CUserDetailsService implements UserDetailsService {
                 authorities);
     }
 
+    @Transactional
+    public void registerNewUserAccount(User user) {
+        userDao.insert(user);
+    }
 
 }

@@ -10,7 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class HibernateService {
 
     private static StandardServiceRegistry registry;
-    private static SessionFactory sessionFactory;
+    private static  SessionFactory sessionFactory;
     private static final String CFG = "hibernate.cfg.xml";
 
     private static SessionFactory buildSessionFactory() {
@@ -28,7 +28,7 @@ public class HibernateService {
         return sessionFactory;
     }
 
-    private static SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() {
         return buildSessionFactory();
     }
 
@@ -36,7 +36,7 @@ public class HibernateService {
         return getSessionFactory().getCurrentSession();
     }
 
-    private static void shutdown() {
+    public static void shutdown() {
         if (registry != null) {
             StandardServiceRegistryBuilder.destroy(registry);
         }

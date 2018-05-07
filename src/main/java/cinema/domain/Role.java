@@ -11,8 +11,8 @@ public class Role {
     private Long id;
     private String name;
 
+
     private Collection<User> users;
-    private Collection<UserPrivilege> userPrivileges;
 
     public Role() {
         super();
@@ -42,28 +42,13 @@ public class Role {
         this.name = name;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     public Collection<User> getUsers() {
         return users;
     }
 
     public void setUsers(Collection<User> users) {
         this.users = users;
-    }
-
-    @ManyToMany
-    @JoinTable(
-            name = "c_user_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "role_id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "privilege_id"))
-    public Collection<UserPrivilege> getUserPrivileges() {
-        return userPrivileges;
-    }
-
-    public void setUserPrivileges(Collection<UserPrivilege> userPrivileges) {
-        this.userPrivileges = userPrivileges;
     }
 
     @Override
@@ -73,13 +58,12 @@ public class Role {
         Role role = (Role) o;
         return Objects.equals(id, role.id) &&
                 Objects.equals(name, role.name) &&
-                Objects.equals(users, role.users) &&
-                Objects.equals(userPrivileges, role.userPrivileges);
+                Objects.equals(users, role.users) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, users, userPrivileges);
+        return Objects.hash(id, name, users);
     }
 
     @Override
@@ -88,7 +72,6 @@ public class Role {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", users=" + users +
-                ", userPrivileges=" + userPrivileges +
                 '}';
     }
 }

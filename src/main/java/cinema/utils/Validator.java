@@ -26,4 +26,6 @@ public class Validator implements org.springframework.validation.Validator {
             errors.rejectValue("Login","Login already exists");
         }
     }
+
+    //TODO: password validator
 }
