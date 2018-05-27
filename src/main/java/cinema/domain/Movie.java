@@ -1,6 +1,9 @@
 package cinema.domain;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,8 +15,20 @@ public class Movie {
     private String duration;
     private Double price;
 
+    private List<Seance> seances;
+
+    @OneToMany(mappedBy = "movie")
+    public List<Seance> getSeances() {
+        return seances;
+    }
+
+    public void setSeances(List<Seance> seances) {
+        this.seances = seances;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -48,6 +63,7 @@ public class Movie {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 
     @Override
     public boolean equals(Object o) {

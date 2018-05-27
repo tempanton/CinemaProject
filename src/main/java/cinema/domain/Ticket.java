@@ -21,7 +21,7 @@ public class Ticket {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @PrimaryKeyJoinColumn
     public Seance getSeance() {
         return seance;
     }

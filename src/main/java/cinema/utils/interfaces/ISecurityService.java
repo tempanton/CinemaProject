@@ -1,4 +1,4 @@
-package cinema.utils;
+package cinema.utils.interfaces;
 
 
 public interface ISecurityService {

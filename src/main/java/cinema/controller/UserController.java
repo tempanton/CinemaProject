@@ -1,7 +1,6 @@
 package cinema.controller;
 
-import cinema.dao.UserDao;
-import cinema.utils.ISecurityService;
+import cinema.domain.*;
 import cinema.utils.SecurityService;
 import cinema.utils.UserService;
 import cinema.utils.Validator;
@@ -11,8 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import cinema.domain.User;
 import org.springframework.ui.Model;
+
 
 @Controller
 public class UserController {
@@ -25,51 +24,42 @@ public class UserController {
 
     @Autowired
     private Validator validator;
-    
-    @RequestMapping(value="/welcome",method = RequestMethod.GET)
-    public String welcome() {
-        return "welcome";
-    }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login(Model model) {
+
         return "login";
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String admin(Model model) {
-        return "admin";
-    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/registration"}, method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
         return "registration";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("loginForm") User user, BindingResult bindingResult, Model model) {
+
+    @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
+    public String login(@ModelAttribute("loginForm") User user,
+                        BindingResult bindingResult) {
+        validator.validate(user, bindingResult);
         if(bindingResult.hasErrors()) {
-            return "redirect:/welcome";
+            return "/login";
         }
-        securityService.autoLogin(user.getLogin(), user.getPassword());
-        return "redirect:/welcome";
+        return "redirect:/movies";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("userForm") User user,
+                               BindingResult bindingResult, Model model) {
 
         validator.validate(user, bindingResult);
-
         if(bindingResult.hasErrors()) {
             return "registration";
         }
-
         userService.registerAccount(user);
         securityService.autoLogin(user.getLogin(), user.getPassword());
-        return "redirect:/welcome";
+        return "redirect:/movies";
     }
-
-    //TODO: welcome page
 
 }

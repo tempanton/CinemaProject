@@ -24,8 +24,8 @@ public class Seance {
         this.id = id;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id", insertable =  false, updatable = false)
     public Movie getMovie() {
         return movie;
     }
@@ -43,8 +43,8 @@ public class Seance {
         this.date = date;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", insertable =  false, updatable = false)
     public Room getRoom() {
         return room;
     }

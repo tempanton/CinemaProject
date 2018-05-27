@@ -18,6 +18,8 @@
         <mapping class="cinema.domain.Seance"/>
         <mapping class="cinema.domain.Ticket"/>
         <mapping class="cinema.domain.User"/>
+        <mapping class="cinema.domain.Order"/>
+        <mapping class="cinema.domain.Seat"/>
     </session-factory>
 
 </hibernate-configuration>
