@@ -13,7 +13,6 @@ import java.util.List;
 public class UserDao implements IUserDao {
 
     @Override
-    @Transactional(readOnly = true)
     public User findByLogin(String login) {
         Session session = HibernateService.getSessionFactory().openSession();
         User user = (User) session.createQuery("FROM User WHERE login=:param")
@@ -25,7 +24,6 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
     public List<User> getUsers() {
         Session session = HibernateService.getSessionFactory().openSession();

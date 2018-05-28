@@ -14,7 +14,6 @@ import java.util.List;
 public class TicketDao implements ITicketDao {
 
     @Override
-    @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
     public List<Ticket> getTickets() {
         Session session = HibernateService.getSessionFactory().openSession();
@@ -25,7 +24,6 @@ public class TicketDao implements ITicketDao {
 
     //TODO:
     @Override
-    @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
     public List<Ticket> getFreeTickets(Seance seance) {
         Session session = HibernateService.getSessionFactory().openSession();
@@ -39,7 +37,6 @@ public class TicketDao implements ITicketDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
     public List<Ticket> getReseredTickets(Seance seance) {
         Session session = HibernateService.getSessionFactory().openSession();

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <style>
     body {
@@ -84,8 +85,7 @@
 
     <div class="container">
 
-        <form name="loginForm" action="/login" method='POST'>
-
+        <form name="loginForm" action="/login" method='post'>
             <div>
                 <input type="text" name="login" required placeholder="Login"/>
             </div>
@@ -94,6 +94,8 @@
                 <input type="password" name="password" placeholder="Password"/>
             </div>
             <br>
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}" />
             <div>
                 <button type="submit" class="btn-submit">Submit</button>
             </div>

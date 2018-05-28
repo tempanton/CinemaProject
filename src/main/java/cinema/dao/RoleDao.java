@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class RoleDao implements IRoleDao {
     @Override
-    @Transactional(readOnly = true)
     public Role findByName(String name) {
         Session session = HibernateService.getSessionFactory().openSession();
         Role role = (Role) session.createQuery("FROM Role WHERE name=:param")

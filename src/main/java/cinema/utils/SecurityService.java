@@ -35,14 +35,7 @@ public class SecurityService implements ISecurityService {
         UsernamePasswordAuthenticationToken authToken =
                 new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
-        //TODO:
-        try {
-            authenticationManager.authenticate(authToken);
-        }
-        catch (BadCredentialsException e) {
-            e.printStackTrace();
-        }
-
+        authenticationManager.authenticate(authToken);
         if (authToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }

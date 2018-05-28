@@ -21,6 +21,7 @@ public class CUserDetailsService implements UserDetailsService {
     private UserDao userDao;
 
     @Override
+    @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
     public UserDetails loadUserByUsername(String login) {
         User user = userDao.findByLogin(login);

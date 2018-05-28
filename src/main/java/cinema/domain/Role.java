@@ -44,8 +44,7 @@ public class Role {
         if (!(o instanceof Role)) return false;
         Role role = (Role) o;
         return Objects.equals(id, role.id) &&
-                Objects.equals(name, role.name); //&&
-                //Objects.equals(users, role.users) ;
+                Objects.equals(name, role.name);
     }
 
     @Override

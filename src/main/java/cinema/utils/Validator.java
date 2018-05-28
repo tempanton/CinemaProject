@@ -1,17 +1,12 @@
 package cinema.utils;
 
-import cinema.dao.UserDao;
 import cinema.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
 @Component
 public class Validator implements org.springframework.validation.Validator {
-
-    @Autowired
-    private UserService userService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -23,16 +18,16 @@ public class Validator implements org.springframework.validation.Validator {
         User user = (User) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "Required");
-        if (user.getLogin().length() < 8 || user.getLogin().length() > 32) {
+        if (user.getLogin().length() < 5) {
             errors.rejectValue("username", "Incorrect login");
         }
 
-        if (user.getLogin().length() < 8 || user.getLogin().length() > 32) {
+        if (user.getLogin().length() < 5) {
             errors.rejectValue("login", "Incorrect login length");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
-        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
+        if (user.getPassword().length() < 5) {
             errors.rejectValue("password", "Incorrect password length");
         }
 

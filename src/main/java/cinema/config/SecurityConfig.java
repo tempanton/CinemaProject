@@ -1,6 +1,7 @@
 package cinema.config;
 
 import cinema.utils.CUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +19,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan("cinema")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private CUserDetailsService cUserDetailsService;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService())
+        auth.userDetailsService(cUserDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
@@ -41,8 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .permitAll();
+                .and().csrf();
 
     }
 
@@ -61,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

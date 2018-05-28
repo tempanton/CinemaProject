@@ -1,5 +1,6 @@
 package cinema.controller;
 
+import cinema.dao.UserDao;
 import cinema.domain.*;
 import cinema.utils.SecurityService;
 import cinema.utils.UserService;
@@ -25,10 +26,11 @@ public class UserController {
     @Autowired
     private Validator validator;
 
+    @Autowired
+    private UserDao userDao;
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    public String login(Model model) {
-
+    public String login() {
         return "login";
     }
 
@@ -38,10 +40,12 @@ public class UserController {
         return "registration";
     }
 
-
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
     public String login(@ModelAttribute("loginForm") User user,
                         BindingResult bindingResult) {
+        if(userDao.findByLogin(user.getLogin()) == null){
+            return "login";
+        }
         validator.validate(user, bindingResult);
         if(bindingResult.hasErrors()) {
             return "/login";
