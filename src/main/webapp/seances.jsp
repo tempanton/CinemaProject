@@ -59,7 +59,6 @@
 <jsp:include page="fragments/navigation-bar.jsp" />
 
 <c:forEach items="${seances}" var="s" varStatus="status" step="1" begin="0">
-
 <div class="box${status.index % 3 + 1}" >
         <div>/${s.getDate()}</div>
         <div>

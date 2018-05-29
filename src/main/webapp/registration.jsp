@@ -90,6 +90,8 @@
             <input type="password" name="password" placeholder="Password"/>
         </div>
         <br>
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}" />
         <div>
             <button type="submit" class="btn-submit">Submit</button>
         </div>

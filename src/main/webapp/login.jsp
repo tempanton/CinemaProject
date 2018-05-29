@@ -68,7 +68,10 @@
     button:focus {
         outline: 0;
     }
-
+    .error {
+        font-size: 12px;
+        -webkit-text-fill-color: red;
+    }
 </style>
 <head>
     <title>Login Page</title>
@@ -84,8 +87,13 @@
     </div>
 
     <div class="container">
+        <c:if test="${not empty error}">
+            <div class="error">${error}</div>
+            <br>
+        </c:if>
 
-        <form name="loginForm" action="/login" method='post'>
+        <form name="loginForm" action="/login" method='POST'>
+
             <div>
                 <input type="text" name="login" required placeholder="Login"/>
             </div>
@@ -94,14 +102,32 @@
                 <input type="password" name="password" placeholder="Password"/>
             </div>
             <br>
-            <input type="hidden" name="${_csrf.parameterName}"
-                   value="${_csrf.token}" />
             <div>
-                <button type="submit" class="btn-submit">Submit</button>
+                <input name="submit" type="submit" class="btn-submit" value="submit" />
             </div>
 
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}" />
 
         </form>
+        <!--
+                <form name="loginForm" action="/login" method='post'>
+                    <div>
+                        <input type="text" name="login" required placeholder="Login"/>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="password" name="password" placeholder="Password"/>
+                    </div>
+                    <br>
+
+                    <div>
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </div>
+
+
+                </form>
+                -->
     </div>
 
 </body>

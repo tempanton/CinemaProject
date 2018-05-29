@@ -35,17 +35,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //TODO:
         http
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/movies/**").authenticated()
-                .antMatchers("/seances/**").authenticated()
-                .antMatchers("/seance-detail/**").authenticated()
-                .antMatchers("/orders/**").authenticated()
-                .anyRequest().authenticated()
+                .antMatchers("/login","/registration").permitAll()
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/movies/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers("/seance-detail/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers("/orders/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers("/seances/**").hasAnyAuthority("ADMIN","USER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .usernameParameter("login")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/movies")
                 .and().csrf();
+
 
     }
 
@@ -55,13 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-
-    @Bean
-    protected UserDetailsService userDetailsService() {
-        return new CUserDetailsService();
-    }
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

@@ -32,7 +32,6 @@ public class SeanceController {
     public String movies(Model model) {
         List<Movie> movies = movieDao.getMovies();
         model.addAttribute("movies", movies);
-        model.addAttribute("movieBoxForm", new Movie());
         return "movies";
     }
 
@@ -62,8 +61,7 @@ public class SeanceController {
 
     @Secured({"ADMIN","USER"})
     @RequestMapping(value={"/seances"}, method = RequestMethod.GET)
-    public String showSeances(@ModelAttribute("movieBoxForm") Movie movie,
-                              @ModelAttribute("seances") List<Seance> seances,
+    public String showSeances(@ModelAttribute("seances") List<Seance> seances,
                               RedirectAttributes redirectAttributes,
                               Model model) {
         model.addAttribute("seances", seances);

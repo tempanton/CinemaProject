@@ -38,9 +38,4 @@ public class CUserDetailsService implements UserDetailsService {
                 authorities);
     }
 
-    @Transactional
-    public void registerNewUserAccount(User user) {
-        userDao.insert(user);
-    }
-
 }
